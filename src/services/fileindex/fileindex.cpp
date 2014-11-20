@@ -136,12 +136,14 @@ void FileIndex::buildIndex()
 /**************************************************************************/
 void FileIndex::handleResults()
 {
+	_indexMutex.lock(); // Blocking until free
 	for(Service::Item *i : _index)
 		delete i;
 	_index.clear();
 	_index.reserve(_builder._result.size());
 	_index.append(_builder._result);
 	_builder._result.clear();
+	_indexMutex.unlock();
 	emit endBuildIndex();
 }
 

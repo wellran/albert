@@ -19,6 +19,7 @@
 
 #include "abstractindex.h"
 #include "fileindexbuilder.h"
+#include <QMutex>
 
 class FileIndex final : public Service, public AbstractIndex
 {
@@ -53,6 +54,7 @@ private:
 	QStringList           _paths;
 	bool                  _indexHiddenFiles;
 	FileIndexBuilder      _builder ;
+	QMutex                _indexMutex;
 
 public slots:
 	void buildIndex() override;
