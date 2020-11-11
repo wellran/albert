@@ -10,9 +10,12 @@ services:
 #  - docker pull ubuntu:20.04
 
 script:
-  - docker build . -f .travis/Dockerfile.ubuntu1604
-  - docker build . -f .travis/Dockerfile.ubuntu1804
-  - docker build . -f .travis/Dockerfile.ubuntu2004
+  - docker build . -t u1604 -f .travis/Dockerfile.ubuntu1604 
+  - docker run u1604
+  - docker build . -t u1804 -f .travis/Dockerfile.ubuntu1804
+  - docker run u1804
+  - docker build . -t u2004 -f .travis/Dockerfile.ubuntu2004
+  - docker run u2004
 
 #notifications:
 #  irc:
